@@ -22,7 +22,7 @@ class BinaryDataPacket extends ResultRow {
     var nulls =
         buffer.readList(((fieldPackets.length + 7 + 2) / 8).floor().toInt());
     log.fine('Nulls: $nulls');
-    var nullMap = List<bool>(fieldPackets.length);
+    var nullMap = List.filled(fieldPackets.length, false);
     var shift = 2;
     var byte = 0;
     for (var i = 0; i < fieldPackets.length; i++) {
@@ -35,7 +35,7 @@ class BinaryDataPacket extends ResultRow {
       }
     }
 
-    values = List<dynamic>(fieldPackets.length);
+    values = List<dynamic>.filled(fieldPackets.length, null);
     for (var i = 0; i < fieldPackets.length; i++) {
       log.fine('$i: ${fieldPackets[i].name}');
       if (nullMap[i]) {

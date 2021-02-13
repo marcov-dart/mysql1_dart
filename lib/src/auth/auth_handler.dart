@@ -37,7 +37,7 @@ class AuthHandler extends Handler {
         ..addAll(doubleHashedPassword);
       final hashedSaltedPassword = sha1.convert(bytes).bytes;
 
-      hash = List<int>(hashedSaltedPassword.length);
+      hash = List.filled(hashedSaltedPassword.length, 0);
       for (var i = 0; i < hash.length; i++) {
         hash[i] = hashedSaltedPassword[i] ^ hashedPassword[i];
       }

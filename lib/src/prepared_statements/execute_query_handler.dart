@@ -49,9 +49,9 @@ class ExecuteQueryHandler extends Handler {
   @override
   Buffer createRequest() {
     var length = 0;
-    var types = List<int>(_values.length * 2);
+    var types = List.filled(_values.length * 2, 0);
     var nullMap = createNullMap();
-    preparedValues = List(_values.length);
+    preparedValues = List<dynamic>.filled(_values.length, null);
     for (var i = 0; i < _values.length; i++) {
       Object value = _values[i];
       var parameterType = _getType(value);
@@ -290,7 +290,7 @@ class ExecuteQueryHandler extends Handler {
 
   List<int> createNullMap() {
     var bytes = ((_values.length + 7) / 8).floor().toInt();
-    var nullMap = List<int>(bytes);
+    var nullMap = List.filled(bytes, 0);
     var byte = 0;
     var bit = 0;
     for (var i = 0; i < _values.length; i++) {
